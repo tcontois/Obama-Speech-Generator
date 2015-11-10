@@ -15,23 +15,23 @@ proposed by technological theorists fearful of
 artificial intelligence run rampant.
 '''
 
-blob = TextBlob(text)
-blob.tags           # [('The', 'DT'), ('titular', 'JJ'),
+#blob = TextBlob(text)
+#blob.tags           # [('The', 'DT'), ('titular', 'JJ'),
                     #  ('threat', 'NN'), ('of', 'IN'), ...]
 
-blob.noun_phrases   # WordList(['titular threat', 'blob',
+#blob.noun_phrases   # WordList(['titular threat', 'blob',
                     #            'ultimate movie monster',
                     #            'amoeba-like mass', ...])
 
-for sentence in blob.sentences:
-    print(sentence.sentiment.polarity)
+#for sentence in blob.sentences:
+    #print(sentence.sentiment.polarity)
 # 0.060
 # -0.341
 
-blob.translate(to="es")  # 'La amenaza titular de The Blob...'
+#blob.translate(to="es")  # 'La amenaza titular de The Blob...'
 
 if __name__ == '__main__':
 	file = open('input.txt')
 	text = file.read()
 	t = TextBlob(text.decode('ascii', 'ignore'))
-	print t.noun_phrases.count
+	print t.noun_phrases.count('world war')

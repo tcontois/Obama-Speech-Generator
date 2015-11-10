@@ -1,0 +1,2 @@
+http://agiliq.com/blog/2009/06/generating-pseudo-random-text-with-markov-chains-u/
+http://shiffman.net/teaching/a2z/generate/#ngrams
