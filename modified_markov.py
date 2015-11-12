@@ -55,13 +55,25 @@ class Markov(object):
 				self.cache[key] = [next_word]
 
 	def generate_markov_text(self, size=25):
+		first=True;
 		seed = random.randint(0, self.word_size - 3)
 		gen_words = []
 		seed_words = self.words_at_position(seed)[:-1]
 		gen_words.extend(seed_words)
 		for i in xrange(size):
-			last_word_len = self.chain_size - 1
-			last_words = gen_words[-1 * last_word_len:]
-			next_word = random.choice(self.cache[tuple(last_words)])
-			gen_words.append(next_word)
+			if(first):
+				last_word_len = self.chain_size - 1
+				last_words = gen_words[-1 * last_word_len:]
+				next_word = random.choice(self.cache[tuple(last_words)])
+				while(next_word[0].isupper() is not True):
+					next_word=random.choice(self.cache[tuple(last_words)])
+				gen_words.append(next_word)
+				first=False;
+			else:
+				last_word_len = self.chain_size - 1
+				last_words = gen_words[-1 * last_word_len:]
+				next_word = random.choice(self.cache[tuple(last_words)])
+				gen_words.append(next_word)
+				if(next_word[len(next_word)-1] is '.'):
+					first=True;
 		return ' '.join(gen_words)
