@@ -5,9 +5,15 @@ import tims_text_gen
 from collections import defaultdict
 
 file_=open('obama_speeches.txt')
+<<<<<<< HEAD
 # markov=markov_text_gen.Markov(file_)
 # print "Markov chain looking at previous 2 words:"
 # print markov.generate_markov_text()
+=======
+markov=markov_text_gen.Markov(file_)
+#print "Markov chain looking at previous 2 words:"
+print markov.generate_markov_text()
+>>>>>>> b39128bed099ea84d92b5360acd96d37ac49ea94
 # print "\nNow looking at previous 3 words \n"
 # markov_modified=modified_markov.Markov(file_, chain_size=2)
 # print markov_modified.generate_markov_text()
