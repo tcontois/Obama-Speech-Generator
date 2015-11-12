@@ -54,6 +54,9 @@ class Markov(object):
 			else:
 				self.cache[key] = [next_word]
 
+
+	#Chooses random word from array and adds to gen_words array. 
+	#
 	def generate_markov_text(self, size=25):
 		seed = random.randint(0, self.word_size - 3)
 		gen_words = []

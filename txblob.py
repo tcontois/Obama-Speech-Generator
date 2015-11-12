@@ -31,7 +31,7 @@ artificial intelligence run rampant.
 #blob.translate(to="es")  # 'La amenaza titular de The Blob...'
 
 if __name__ == '__main__':
-	file = open('input.txt')
+	file = open('obama_speeches.txt')
 	text = file.read()
 	t = TextBlob(text.decode('ascii', 'ignore'))
-	print t.noun_phrases.count('world war')
+	print t.noun_phrases
