@@ -2,7 +2,7 @@
 from textblob import TextBlob
 
 
-file_=open('input.txt')
+#file_=open('input.txt')
 
 text = '''
 The titular threat of The Blob has always struck me as the ultimate movie
@@ -31,7 +31,7 @@ artificial intelligence run rampant.
 #blob.translate(to="es")  # 'La amenaza titular de The Blob...'
 
 if __name__ == '__main__':
-	file = open('obama_speeches.txt')
+	file = open('short_ubama.txt')
 	text = file.read()
 	t = TextBlob(text.decode('ascii', 'ignore'))
 	print t.noun_phrases
