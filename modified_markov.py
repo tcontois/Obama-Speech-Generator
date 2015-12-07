@@ -6,7 +6,7 @@ class Markov(object):
 		self.chain_size = chain_size
 		self.cache = {}
 		# self.open_file = open_file
-		self.open_file = open('obama_speeches.txt')
+		self.open_file = open('./datasets/obama_speeches.txt')
 		self.topic_file = topic_file
 		self.topic_weight = topic_weight
 		self.words = self.file_to_words()
@@ -73,13 +73,13 @@ class Markov(object):
 
 	def generate_markov_text(self, size=25):
 		if self.topic_file:
-			return self.generate_with_topic()
+			return self.generate_with_topic(size=size)
 		else:
-			return self.generate_without_topic()
+			return self.generate_without_topic(size=size)
 
 	def generate_without_topic(self, size=25):
 		seed = random.randint(0, self.word_size - self.chain_size)
-		while(self.words[seed-1][len(self.words[seed-1])-1] != '.' and self.words[seed][0].isupper() is False):
+		while(self.words[seed-1][len(self.words[seed-1])-1] != '.' or self.words[seed][0].isupper() is False):
 			seed = random.randint(0, self.word_size-self.chain_size)
 		gen_words = []
 		seed_words = self.words_at_position(seed)[:-1]
@@ -97,7 +97,7 @@ class Markov(object):
 
 	def generate_with_topic(self, size=25):
 		seed = random.randint(0, self.topic_word_size - self.chain_size)
-		while(self.topic_words[seed-1][len(self.topic_words[seed-1])-1] != '.' and self.topic_words[seed][0].isupper() is False):
+		while(self.topic_words[seed-1][len(self.topic_words[seed-1])-1] != '.' or self.topic_words[seed][0].isupper() is False):
 			seed = random.randint(0, self.topic_word_size-self.chain_size)
 		gen_words = []
 		seed_words = self.topic_words_at_position(seed)[:-1]

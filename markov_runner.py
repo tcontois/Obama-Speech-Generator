@@ -8,10 +8,10 @@ from collections import defaultdict
 # markov=markov_text_gen.Markov(file_)
 # print "Markov chain looking at previous 2 words:"
 # print markov.generate_markov_text()
-topic = open('health_care.txt')
-markov=modified_markov.Markov(topic_file=topic, topic_weight=10, chain_size=3)
+topic = open('./datasets/health_care.txt')
+markov=modified_markov.Markov(topic_file=topic, topic_weight=50, chain_size=3)
 print "Markov chain looking at previous 3 words:"
-print markov.generate_markov_text()
+print markov.generate_markov_text(size=50)
 # for i in range(2,5):
 # 	markov_modified=modified_markov.Markov(file_, chain_size=(i))
 # 	print markov_modified.generate_markov_text()
