@@ -2,11 +2,13 @@ import random
 
 class Markov(object):
 
-	def __init__(self, chain_size=3):
+	def __init__(self, topic_file=None, topic_weight=1, chain_size=3):
 		self.chain_size = chain_size
 		self.cache = {}
 		# self.open_file = open_file
 		self.open_file = open('obama_speeches.txt')
+		self.topic_file = topic_file
+		self.topic_weight = topic_weight
 		self.words = self.file_to_words()
 		self.word_size = len(self.words)
 		self.database()
@@ -15,6 +17,13 @@ class Markov(object):
 		self.open_file.seek(0)
 		data = self.open_file.read()
 		words = data.split()
+		if self.topic_file:
+			self.topic_file.seek(0)
+			topic_data = self.topic_file.read()
+			self.topic_words = topic_data.split()
+			self.topic_word_size = len(self.topic_words)
+			for i in range(self.topic_weight):
+				words = words + self.topic_words
 		return words
 
 	def words_at_position(self, i):
@@ -22,6 +31,13 @@ class Markov(object):
 		chain = []
 		for chain_index in range(0, self.chain_size):
 			chain.append(self.words[i + chain_index])
+		return chain
+
+	def topic_words_at_position(self, i):
+		"""Uses the chain size to find a list of the words at an index."""
+		chain = []
+		for chain_index in range(0, self.chain_size):
+			chain.append(self.topic_words[i + chain_index])
 		return chain
 
 	def chains(self):
@@ -55,11 +71,16 @@ class Markov(object):
 			else:
 				self.cache[key] = [next_word]
 
-
 	def generate_markov_text(self, size=25):
-		seed = random.randint(0, self.word_size - 3)
+		if self.topic_file:
+			return self.generate_with_topic()
+		else:
+			return self.generate_without_topic()
+
+	def generate_without_topic(self, size=25):
+		seed = random.randint(0, self.word_size - self.chain_size)
 		while(self.words[seed-1][len(self.words[seed-1])-1] != '.' and self.words[seed][0].isupper() is False):
-			seed = random.randint(0, self.word_size-3)
+			seed = random.randint(0, self.word_size-self.chain_size)
 		gen_words = []
 		seed_words = self.words_at_position(seed)[:-1]
 		gen_words.extend(seed_words)
@@ -70,6 +91,24 @@ class Markov(object):
 			next_word = random.choice(self.cache[tuple(last_words)])
 			gen_words.append(next_word)
 			count = count + 1
-			if(count >= size and next_word[len(next_word)-1] == '.'):
+			if(count >= size and next_word[len(next_word)-1] in set(['.', '!', '?'])):
+				break
+		return ' '.join(gen_words)
+
+	def generate_with_topic(self, size=25):
+		seed = random.randint(0, self.topic_word_size - self.chain_size)
+		while(self.topic_words[seed-1][len(self.topic_words[seed-1])-1] != '.' and self.topic_words[seed][0].isupper() is False):
+			seed = random.randint(0, self.topic_word_size-self.chain_size)
+		gen_words = []
+		seed_words = self.topic_words_at_position(seed)[:-1]
+		gen_words.extend(seed_words)
+		count = 0
+		while(True):
+			last_word_len = self.chain_size - 1
+			last_words = gen_words[-1 * last_word_len:]
+			next_word = random.choice(self.cache[tuple(last_words)])
+			gen_words.append(next_word)
+			count = count + 1
+			if(count >= size and next_word[len(next_word)-1] in set(['.', '!', '?'])):
 				break
 		return ' '.join(gen_words)
