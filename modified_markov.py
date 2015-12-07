@@ -3,6 +3,7 @@ import random
 class Markov(object):
 
 	def __init__(self, open_file, chain_size=3):
+		file_=open('obama_speeches.txt')
 		self.chain_size = chain_size
 		self.cache = {}
 		self.open_file = open_file
