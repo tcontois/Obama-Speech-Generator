@@ -72,10 +72,13 @@ class Markov(object):
 				self.cache[key] = [next_word]
 
 	def generate_markov_text(self, size=25):
+		speech = 'Good afternoon. Please be seated. '
 		if self.topic_file:
-			return self.generate_with_topic(size=size)
+			speech += self.generate_with_topic(size=size)
 		else:
-			return self.generate_without_topic(size=size)
+			speech += self.generate_without_topic(size=size)
+		speech += ' Thank you.'
+		return speech
 
 	def generate_without_topic(self, size=25):
 		seed = random.randint(0, self.word_size - self.chain_size)
