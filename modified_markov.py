@@ -1,4 +1,5 @@
 import random
+import sys
 
 class Markov(object):
 
@@ -115,3 +116,11 @@ class Markov(object):
 			if(count >= size and next_word[len(next_word)-1] in set(['.', '!', '?'])):
 				break
 		return ' '.join(gen_words)
+
+
+if __name__ == '__main__':
+	#print "Welcome to Tim's Text Gen"
+	#print "Please choose a topic: Foreign Policy (1) or Health Care (2)"
+	topic = input("Enter Topic")
+	tpc = input("What's the Topic huh?")
+	print topic
