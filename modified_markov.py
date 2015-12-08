@@ -7,7 +7,6 @@ class Markov(object):
 		self.chain_size = chain_size
 		self.cache = {}
 		self.open_file = open('./datasets/obama_speeches.txt')
-		# self.open_file = open('./datasets/hello.txt')
 		self.topic_file = topic_file
 		self.topic_weight = topic_weight
 		self.words = self.file_to_words()
@@ -85,14 +84,30 @@ class Markov(object):
 		return speech
 
 	def generate_opening(self):
-		openings = ["Good afternoon.", "Hello.", "Please be seated."]
-		index = random.randint(0, len(openings))
-		return openings[index]
+		openings = ["Good afternoon.", "Hello, everybody!", "Hello.", "Thank you.", "Thank you, everybody.", "Please be seated.", 
+			"All right, everybody go ahead and have a seat.", "How is everybody doing today?", "Thank you so much.",
+			"If everybody has chairs, go ahead and use them.", "Look at all of you.", "Goodness.", "Thank you!",
+			"Giving all praise and honor to God for bringing us here today.", "I am so grateful to see all of you.",
+			"You guys are still cheering back there?", "Hello!", "I got a lot to say here.", "It is great to be here.",
+			"It's good to be back with some real Patriots.", "I love you!", "It is great to be back.", "Hey!",
+			"Please have a seat.", "Thank you very much.", "Good morning.", "Good morning, everybody."]
+		text = []
+		num_openings = random.randint(1,3)
+		for i in range(num_openings):
+			index = random.randint(0, len(openings)-1)
+			text += openings[index].split() 
+		return ' '.join(text)
 
 	def generate_ending(self):
-		endings = ["Thanks.", "Thank you!"]
-		index = random.randint(0, len(endings))
-		return endings[index]
+		endings = ["Thanks.", "Thank you!", "God bless you.", "God bless the United States of America.",
+			"Thank you very much.", "Thank you very much, everybody.", "God bless America.", "Good bye.",
+			"Have a good night."]
+		text = []
+		num_endings = random.randint(1,2)
+		for i in range(num_endings):
+			index = random.randint(0, len(endings)-1)
+			text += endings[index].split()
+		return ' '.join(text)
 
 	def generate_without_topic(self, size=25):
 		seed = random.randint(0, self.word_size - self.chain_size)
