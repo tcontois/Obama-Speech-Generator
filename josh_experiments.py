@@ -24,7 +24,7 @@ def getwords():
 
 def writeseq():
 	filew = open('datasets/sequence.txt','w')
-	file = open('datasets/foreign_policy.txt')
+	file = open('datasets/obama_speeches.txt')
 	text = file.read()
 	t = TextBlob(text.decode('ascii','ignore'))
 	#t = TextBlob("Hello. This is a sample text. I fuckin hate alex lSSALLE.! yes !")
@@ -41,18 +41,20 @@ if __name__ == '__main__':
 
 	sequence_markov=sequence.Markov(open_file)
 	pos_sequence= sequence_markov.generate_markov_text().split()
-	sentence=[]
+	sentence=''
 	first=True
-	for tags in pos_sequence:
-		if (first):
-			sentence=pos_dictionary[tags][random.randint(0,len(pos_dictionary[tags])-1)]
-			while not sentence[0].isupper():
+	for x in range(0,5):
+		for tags in pos_sequence:
+			if (first):
 				sentence=pos_dictionary[tags][random.randint(0,len(pos_dictionary[tags])-1)]
-			first=False
-		else:
-			sentence=sentence+' '+ pos_dictionary[tags][random.randint(0,len(pos_dictionary[tags])-1)]
-
-	print sentence
+				while not sentence[0].isupper():
+					sentence=pos_dictionary[tags][random.randint(0,len(pos_dictionary[tags])-1)]
+				first=False
+			else:
+				sentence=sentence+' '+ pos_dictionary[tags][random.randint(0,len(pos_dictionary[tags])-1)]
+		print sentence
+		print
+		sentence=''
 
 	getwords()
 
