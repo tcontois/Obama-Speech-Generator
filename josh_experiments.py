@@ -29,7 +29,6 @@ def writeseq():
 	t = TextBlob(text.decode('ascii','ignore'))
 	#t = TextBlob("Hello. This is a sample text. I fuckin hate alex lSSALLE.! yes !")
 	wordlist = t.tags
-	print wordlist
 	taglist = {}
 	for k,v in wordlist:
 		filew.write(v+" ")
@@ -42,9 +41,17 @@ if __name__ == '__main__':
 
 	sequence_markov=sequence.Markov(open_file)
 	pos_sequence= sequence_markov.generate_markov_text().split()
-	sentence=''
+	sentence=[]
+	first=True
 	for tags in pos_sequence:
-		sentence=sentence+' '+ pos_dictionary[tags][random.randint(0,len(pos_dictionary[tags])-1)]
+		if (first):
+			sentence=pos_dictionary[tags][random.randint(0,len(pos_dictionary[tags])-1)]
+			while not sentence[0].isupper():
+				sentence=pos_dictionary[tags][random.randint(0,len(pos_dictionary[tags])-1)]
+			first=False
+		else:
+			sentence=sentence+' '+ pos_dictionary[tags][random.randint(0,len(pos_dictionary[tags])-1)]
+
 	print sentence
 
 	getwords()
