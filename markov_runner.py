@@ -15,7 +15,10 @@ if __name__ == '__main__':
 		topic = open('./datasets/short_health_care.txt')
 	print "Please choose a GODDAMN CHAIN LENGTH MAN"
 	chainlength = input()
-	markov=modified_markov.Markov(topic_file=topic, topic_weight=50, chain_size=chainlength)
+	print "How much do you weigh? (1-10)"
+	weight=input()
+	weight=weight*7
+	markov=modified_markov.Markov(topic_file=topic, topic_weight=weight, chain_size=chainlength)
 	print "Markov chain looking at previous 3 words:"
 	print markov.generate_markov_text(size=50)
 	# for i in range(2,5):

@@ -2,7 +2,7 @@ from collections import defaultdict
 from textblob import TextBlob
 
 
-def analyze():
+def getwords():
 	file = open('datasets/short_fp.txt')
 	text = file.read()
 	t = TextBlob(text.decode('ascii', 'ignore'))
@@ -19,5 +19,5 @@ def analyze():
 
 
 if __name__ == '__main__':
-	analyze()
+	getwords()
 
