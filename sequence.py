@@ -25,9 +25,9 @@ class Markov(object):
 		
 		if len(self.words) < 3:
 			return
+		
 		for i in range(len(self.words) - 2):
 			yield (self.words[i], self.words[i+1], self.words[i+2])
-			
 			
 	def database(self):
 		for w1, w2, w3 in self.triples():
@@ -39,16 +39,11 @@ class Markov(object):
 				
 	def generate_markov_text(self, size=25):
 		seed = random.randint(0, self.word_size-3)
-		while(self.words[seed-1][len(self.words[seed-1])-1] != '.' and self.words[seed][0].isupper() is False):
-			seed = random.randint(0, self.word_size-3)
 		seed_word, next_word = self.words[seed], self.words[seed+1]
 		w1, w2 = seed_word, next_word
 		gen_words = []
-		count = 0
-		while(count < size or w2[len(w2)-1] != '.'):
-		# for i in xrange(size):
+		for i in xrange(size):
 			gen_words.append(w1)
 			w1, w2 = w2, random.choice(self.cache[(w1, w2)])
-			count = count + 1
 		gen_words.append(w2)
 		return ' '.join(gen_words)
