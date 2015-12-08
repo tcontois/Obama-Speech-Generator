@@ -19,7 +19,7 @@ if __name__ == '__main__':
 	weight=input()
 	weight=weight*7
 	markov=modified_markov.Markov(topic_file=topic, topic_weight=weight, chain_size=chainlength)
-	print "Markov chain looking at previous 3 words:"
+	print "Markov chain looking at previous %s words:" % chainlength
 	print markov.generate_markov_text(size=50)
 	# for i in range(2,5):
 	# 	markov_modified=modified_markov.Markov(file_, chain_size=(i))

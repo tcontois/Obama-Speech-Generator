@@ -6,8 +6,8 @@ class Markov(object):
 	def __init__(self, topic_file=None, topic_weight=1, chain_size=3):
 		self.chain_size = chain_size
 		self.cache = {}
-		# self.open_file = open('./datasets/obama_speeches.txt')
-		self.open_file = open('./datasets/hello.txt')
+		self.open_file = open('./datasets/obama_speeches.txt')
+		# self.open_file = open('./datasets/hello.txt')
 		self.topic_file = topic_file
 		self.topic_weight = topic_weight
 		self.words = self.file_to_words()
@@ -74,13 +74,25 @@ class Markov(object):
 
 	def generate_markov_text(self, size=25):
 		# speech = 'Good afternoon. Please be seated. '
-		speech = ''
+		speech = self.generate_opening()
+		speech += " "
 		if self.topic_file:
 			speech += self.generate_with_topic(size=size)
 		else:
 			speech += self.generate_without_topic(size=size)
-		# speech += ' Thank you.'
+		speech += " "
+		speech += self.generate_ending()
 		return speech
+
+	def generate_opening(self):
+		openings = ["Good afternoon.", "Hello.", "Please be seated."]
+		index = random.randint(0, len(openings))
+		return openings[index]
+
+	def generate_ending(self):
+		endings = ["Thanks.", "Thank you!"]
+		index = random.randint(0, len(endings))
+		return endings[index]
 
 	def generate_without_topic(self, size=25):
 		seed = random.randint(0, self.word_size - self.chain_size)
