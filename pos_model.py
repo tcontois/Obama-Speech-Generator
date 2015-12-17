@@ -43,18 +43,12 @@ if __name__ == '__main__':
 	pos_sequence= sequence_markov.generate_markov_text().split()
 	sentence=''
 	first=True
-	for x in range(0,5):
-		for tags in pos_sequence:
-			if (first):
+	for tags in pos_sequence:
+		if (first):
+			sentence=pos_dictionary[tags][random.randint(0,len(pos_dictionary[tags])-1)]
+			while not sentence[0].isupper():
 				sentence=pos_dictionary[tags][random.randint(0,len(pos_dictionary[tags])-1)]
-				while not sentence[0].isupper():
-					sentence=pos_dictionary[tags][random.randint(0,len(pos_dictionary[tags])-1)]
-				first=False
-			else:
-				sentence=sentence+' '+ pos_dictionary[tags][random.randint(0,len(pos_dictionary[tags])-1)]
-		print sentence
-		print
-		sentence=''
-
-	getwords()
-
+			first=False
+		else:
+			sentence=sentence+' '+ pos_dictionary[tags][random.randint(0,len(pos_dictionary[tags])-1)]
+	print sentence
