@@ -2,7 +2,7 @@ import random
 
 class Markov(object):
 
-	def __init__(self, open_file, chain_size=4):
+	def __init__(self, open_file, chain_size=2):
 		self.chain_size = chain_size
 		self.cache = {}
 		self.open_file = open_file
@@ -38,6 +38,7 @@ class Markov(object):
 				self.cache[key].append(next_word)
 			else:
 				self.cache[key] = [next_word]
+		return self.cache
 
 	def generate_markov_text(self, size=35):
 		seed = random.randint(0, self.word_size - 3)

@@ -36,19 +36,26 @@ def writeseq():
 
 if __name__ == '__main__':
 	writeseq()
-	open_file=open('./datasets/sequence.txt')
+	sequence_file=open('./datasets/sequence.txt')
+	word_file=open('./datasets/obama_speeches.txt')
 	pos_dictionary=getwords()
-
-	sequence_markov=sequence.Markov(open_file)
+	sequence_markov=sequence.Markov(sequence_file)
+	word_markov=sequence.Markov(word_file)
+	word_markov_cache=word_markov.database()
 	pos_sequence= sequence_markov.generate_markov_text().split()
-	sentence=''
+	sentence=[]
 	first=True
 	for tags in pos_sequence:
+		next_words_pos=pos_dictionary[tags]
 		if (first):
-			sentence=pos_dictionary[tags][random.randint(0,len(pos_dictionary[tags])-1)]
-			while not sentence[0].isupper():
-				sentence=pos_dictionary[tags][random.randint(0,len(pos_dictionary[tags])-1)]
+			next_word=random.choice(next_words_pos)
+			sentence.append(next_word)
 			first=False
 		else:
-			sentence=sentence+' '+ pos_dictionary[tags][random.randint(0,len(pos_dictionary[tags])-1)]
-	print sentence
+			next_works_markov=word_markov_cache[sentence[-1]]
+			next_words_pos.intersect
+			next_words=set(next_words_pos).intersection(next_works_markov)
+			sentence.append(random.choice(next_word))
+			break
+
+	print ' '.join(sentence)
