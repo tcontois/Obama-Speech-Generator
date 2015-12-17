@@ -24,7 +24,7 @@ if __name__ == '__main__':
 	chainlength=3
 	markov=modified_markov.Markov(topic_file=topic, topic_weight=50, chain_size=chainlength)
 	print "Markov chain looking at previous %s words:" % chainlength
-	print markov.generate_markov_text(size=25)
+	print markov.generate_markov_text(size=50)
 	# for i in range(2,5):
 	# 	markov_modified=modified_markov.Markov(file_, chain_size=(i))
 	# 	print markov_modified.generate_markov_text()
