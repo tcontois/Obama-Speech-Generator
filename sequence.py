@@ -51,3 +51,4 @@ class Markov(object):
 			next_word = random.choice(self.cache[tuple(last_words)])
 			gen_words.append(next_word)
 		return ' '.join(gen_words)
+

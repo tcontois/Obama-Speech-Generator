@@ -60,11 +60,23 @@ if __name__ == '__main__':
 	word_markov_cache=word_markov.database()
 	pos_sequence= sequence_markov.generate_markov_text().split()
 	sentence=[]
+	intersection=[]
 	first=True
+	print word_markov_cache[('harass',)]
 	for tags in pos_sequence:
-		next_word=random.choice(pos_dictionary[tags])
-		sentence.append(next_word)
-
+		if len(sentence):
+			next_word=random.choice(pos_dictionary[tags])
+			sentence.append(next_word)
+		else:
+			for words in word_markov_cache[(next_word,)]:
+				if words in pos_dictionary[tags]:
+					intersection.append(words)
+			if len(intersection)>0:
+				next_word=random.choice(intersection)
+			else:
+				next_word=random.choice(pos_dictionary[tags])
+			sentence.append(next_word)
+		print sentence
 		# next_words_pos=pos_dictionary[tags]
 		# if (first):
 		# 	next_word=random.choice(next_words_pos)
