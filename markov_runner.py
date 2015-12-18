@@ -24,22 +24,22 @@ if __name__ == '__main__':
 	# weight=input()
 	# weight=weight*7
 	# markov=modified_markov.Markov(topic_file=topic, topic_weight=weight, chain_size=chainlength)
-	# topic = open('./datasets/short_health_care.txt')
+	topic = open('./datasets/short_health_care.txt')
 
 	# topic = open('./datasets/short_fp.txt')
-	# chainlength=3
-	# markov=modified_markov.Markov(topic_file=topic, topic_weight=50, chain_size=chainlength)
-	# print "Markov chain looking at previous %s words:" % chainlength
-	# print markov.generate_markov_text(size=50)
+	chainlength=3
+	markov=modified_markov.Markov(topic_file=topic, topic_weight=50, chain_size=chainlength)
+	print "Markov chain looking at previous %s words:" % chainlength
+	print markov.generate_markov_text(size=50)
 
 	# UNCOMMENT THE ABOVE LINE TO GENERATE THE CLASSIC MARKOV GENERATED TEXT
 
 	
 	# unbiased_text = markov.generate_markov_text(size=50)
 
-	markov=modified_markov.Markov(topic_file=None, topic_weight=0)
-	print "Actual Obama speech:"
-	print markov.get_actual_obama_speech(size=50)
+	# markov=modified_markov.Markov(topic_file=None, topic_weight=0)
+	# print "Actual Obama speech:"
+	# print markov.get_actual_obama_speech(size=50)
 
 
 	# unbiased_text = markov.generate_markov_text(size=50)
