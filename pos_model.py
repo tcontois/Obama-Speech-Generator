@@ -20,7 +20,7 @@ def getwords():
 	# 		taglist[v] = [k]
 	# return taglist
 	filew = open('datasets/dictionaryforalex.txt','w')
-	file = open('datasets/short_fp.txt')
+	file = open('datasets/obama_speeches.txt')
 	text = file.read()
 	# t = TextBlob(text.decode('ascii', 'ignore'))
 	# wordlist = t.tags
@@ -50,8 +50,7 @@ def writeseq():
 
 
 if __name__ == '__main__':
-	writeseq()
-
+	# writeseq()
 	sequence_file=open('./datasets/sequence.txt')
 	word_file=open('./datasets/obama_speeches.txt')
 	pos_dictionary=getwords()
@@ -62,21 +61,23 @@ if __name__ == '__main__':
 	sentence=[]
 	intersection=[]
 	first=True
-	print word_markov_cache[('harass',)]
+	#print word_markov_cache[('harass',)]
 	for tags in pos_sequence:
-		if len(sentence):
+		if len(sentence)==0:
 			next_word=random.choice(pos_dictionary[tags])
 			sentence.append(next_word)
 		else:
+			next_word=sentence[-1]
 			for words in word_markov_cache[(next_word,)]:
 				if words in pos_dictionary[tags]:
 					intersection.append(words)
+					print intersection
 			if len(intersection)>0:
 				next_word=random.choice(intersection)
 			else:
 				next_word=random.choice(pos_dictionary[tags])
 			sentence.append(next_word)
-		print sentence
+		print ' '.join(sentence)
 		# next_words_pos=pos_dictionary[tags]
 		# if (first):
 		# 	next_word=random.choice(next_words_pos)
