@@ -31,7 +31,7 @@ artificial intelligence run rampant.
 #blob.translate(to="es")  # 'La amenaza titular de The Blob...'
 
 if __name__ == '__main__':
-	file = open('short_ubama.txt')
+	file = open('./datasets/short_fp.txt')
 	text = file.read()
 	t = TextBlob(text.decode('ascii', 'ignore'))
 	print t.noun_phrases

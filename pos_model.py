@@ -5,20 +5,6 @@ import sequence
 import random
 
 def getwords():
-	# filew = open('datasets/dictionaryforalex.txt','w')
-	# file = open('datasets/short_fp.txt')
-	# text = file.read()
-	# t = TextBlob(text.decode('ascii', 'ignore'))
-	# wordlist = t.tags
-	# taglist = {}
-	# #print wordlist
-	# for k,v in wordlist:
-	# 	filew.write(k+" "+v+'\n')
-	# 	if v in taglist:
-	# 		taglist[v].append(k)
-	# 	else:
-	# 		taglist[v] = [k]
-	# return taglist
 	filew = open('datasets/dictionaryforalex.txt','w')
 	file = open('datasets/obama_speeches.txt')
 	text = file.read()
@@ -54,40 +40,32 @@ if __name__ == '__main__':
 	sequence_file=open('./datasets/sequence.txt')
 	word_file=open('./datasets/obama_speeches.txt')
 	pos_dictionary=getwords()
-	sequence_markov=sequence.Markov(sequence_file)
+	# sequence_markov=sequence.Markov(sequence_file)
 	word_markov=sequence.Markov(word_file)
 	word_markov_cache=word_markov.database()
-	pos_sequence= sequence_markov.generate_markov_text().split()
+	# pos_sequence= sequence_markov.generate_markov_text().split()
+	pos_sequence= " PRP MD VB IN DT NN CC DT NN IN PRP VBP VBN UH PRP MD VB CC VB NNP IN DT JJ NN CC PRP MD VB PRP IN VBG DT NN IN NN NN RB IN VBG NNS TO VB NNS IN NNS RBR"
+	pos_sequence=pos_sequence.split()
 	sentence=[]
-	intersection=[]
 	first=True
-	#print word_markov_cache[('harass',)]
 	for tags in pos_sequence:
+		intersection=[]
 		if len(sentence)==0:
 			next_word=random.choice(pos_dictionary[tags])
 			sentence.append(next_word)
 		else:
 			next_word=sentence[-1]
 			for words in word_markov_cache[(next_word,)]:
-				if words in pos_dictionary[tags]:
+				uwords= unicode(words, "utf-8")
+				if uwords in pos_dictionary[tags]:
 					intersection.append(words)
-					print intersection
 			if len(intersection)>0:
 				next_word=random.choice(intersection)
+				print intersection
 			else:
+				print "Intersection Empty"
 				next_word=random.choice(pos_dictionary[tags])
 			sentence.append(next_word)
 		print ' '.join(sentence)
-		# next_words_pos=pos_dictionary[tags]
-		# if (first):
-		# 	next_word=random.choice(next_words_pos)
-		# 	sentence.append(next_word)
-		# 	first=False
-		# else:
-		# 	next_works_markov=word_markov_cache[sentence[-1]]
-		# 	next_words_pos.intersect
-		# 	next_words=set(next_words_pos).intersection(next_works_markov)
-		# 	sentence.append(random.choice(next_word))
-		# 	break
 
 	print ' '.join(sentence)

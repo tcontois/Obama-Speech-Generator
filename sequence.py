@@ -40,7 +40,7 @@ class Markov(object):
 				self.cache[key] = [next_word]
 		return self.cache
 
-	def generate_markov_text(self, size=35):
+	def generate_markov_text(self, size=10):
 		seed = random.randint(0, self.word_size - 3)
 		gen_words = []
 		seed_words = self.words_at_position(seed)[:-1]
