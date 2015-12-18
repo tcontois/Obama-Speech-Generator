@@ -5,6 +5,8 @@ import tims_text_gen
 import random, string
 from collections import defaultdict
 from textblob import TextBlob
+import nltk
+
 
 
 
@@ -28,17 +30,28 @@ if __name__ == '__main__':
 	markov=modified_markov.Markov(topic_file=None, topic_weight=50, chain_size=chainlength)
 	print "Markov chain looking at previous %s words:" % chainlength
 	# print markov.generate_markov_text(size=50)
-	unbiased_text = markov.generate_markov_text(size=40)
-	t = TextBlob(unbiased_text.decode('ascii', 'ignore'))
+	unbiased_text = markov.generate_markov_text(size=50)
+
 	topic_text=topic.read()
 	biased_noun_phrases=TextBlob(topic_text.decode('ascii','ignore')).noun_phrases
-	unbiased_noun_phrases=t.noun_phrases
-	exclude = set(string.punctuation)
+
+	# t = TextBlob(unbiased_text.decode('ascii', 'ignore'))
+	# unbiased_noun_phrases=t.noun_phrases
+	# print unbiased_noun_phrases
+
+	# print unbiased_text
+
+	exclude = set(".,'!?")	
+
 	unbiased_text = ''.join(ch for ch in unbiased_text if ch not in exclude)
 
-	print unbiased_text
 	unbiased_text=unbiased_text.lower()
-	np_index={}
+	
+	t = TextBlob(unbiased_text.decode('ascii', 'ignore'))
+	unbiased_noun_phrases=t.noun_phrases
+
+	print unbiased_noun_phrases
+
 	for np in unbiased_noun_phrases:
 		if np not in biased_noun_phrases:
 			try:
@@ -47,17 +60,26 @@ if __name__ == '__main__':
 				np_len=len(np)
 				first_part=unbiased_text[:index]
 				second_part=unbiased_text[(index+np_len):]
-				new_np=random.choice(biased_noun_phrases)
-				new_np=new_np.encode('utf-8')
+				if unbiased_text[index+np_len-1] is 's':
+					print "TRUE ", np
+					new_np=random.choice(biased_noun_phrases)
+					new_np=new_np.encode('utf-8')
+					while  new_np[-1] != 's':
+						new_np=random.choice(biased_noun_phrases)
+						new_np=new_np.encode('utf-8')
+				else:
+					new_np=random.choice(biased_noun_phrases)
+					new_np=new_np.encode('utf-8')
 				new_np=new_np.upper()
 				unbiased_text=first_part+new_np+second_part
 			except:
 				pass
-	print unbiased_noun_phrases
+
+	# print unbiased_noun_phrases
 	# print len(unbiased_noun_phrases)
 	# print len(np_index)
 
-	print unbiased_text
+	# print unbiased_text
 	# print unbiased_noun_phrases
 	# print biased_noun_phrases
 
