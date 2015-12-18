@@ -8,8 +8,6 @@ from textblob import TextBlob
 import nltk
 
 
-
-
 if __name__ == '__main__':
 	# print "Welcome to Tim Text Gen"
 	# print "Please Choose a Topic: Foreign Policy (1) or Health Care (2)"
