@@ -145,3 +145,19 @@ class Markov(object):
 				break
 		return ' '.join(gen_words)
 
+	def get_cache_list(self, words_seq=None):
+		if(len(words_seq) < self.chain_size - 1):
+			return None
+		else:
+			last_word_len = self.chain_size - 1
+			# last_words = words_seq[-1 * last_word_len:]
+			last_words = []
+			for i in range(1, last_word_len+1):
+				# last_words.append(str(words_seq[-1*i]))
+				last_words.insert(0, str(words_seq[-1*i]))
+			if(tuple(last_words) in self.cache):
+				print tuple(last_words)
+				return self.cache[tuple(last_words)]
+			else:
+				return None
+
