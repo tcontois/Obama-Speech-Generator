@@ -73,9 +73,9 @@ class Markov(object):
 
 	def generate_markov_text(self, size=25):
 		# speech = 'Good afternoon. Please be seated. '
-		speech = " "
+		speech = ""
 		# speech = self.generate_opening()
-		speech += " "
+		# speech += " "
 		if self.topic_file:
 			speech += self.generate_with_topic(size=size)
 		else:
@@ -160,4 +160,20 @@ class Markov(object):
 				return self.cache[tuple(last_words)]
 			else:
 				return None
+
+	def get_actual_obama_speech(self, size=25):
+		seed = random.randint(0, self.word_size - size)
+		while(self.words[seed-1][len(self.words[seed-1])-1] != '.' or self.words[seed][0].isupper() is False):
+			seed = random.randint(0, self.word_size-self.chain_size)
+		gen_words = []
+		gen_words.append(self.words[seed])
+		count = 0
+		while(seed < self.word_size):
+			count += 1
+			seed += 1
+			next_word = self.words[seed]
+			gen_words.append(next_word)
+			if(count >= size and next_word[len(next_word)-1] in set(['.', '!', '?'])):
+				break
+		return ' '.join(gen_words)
 
