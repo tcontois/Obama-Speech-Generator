@@ -61,7 +61,6 @@ if __name__ == '__main__':
 					intersection.append(words)
 			if len(intersection)>0:
 				next_word=random.choice(intersection)
-				print intersection
 			else:
 				print "Intersection Empty"
 				next_word=random.choice(pos_dictionary[tags])

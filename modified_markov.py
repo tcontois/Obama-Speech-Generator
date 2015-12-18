@@ -73,14 +73,15 @@ class Markov(object):
 
 	def generate_markov_text(self, size=25):
 		# speech = 'Good afternoon. Please be seated. '
-		speech = self.generate_opening()
+		speech = " "
+		# speech = self.generate_opening()
 		speech += " "
 		if self.topic_file:
 			speech += self.generate_with_topic(size=size)
 		else:
 			speech += self.generate_without_topic(size=size)
 		speech += " "
-		speech += self.generate_ending()
+		# speech += self.generate_ending()
 		return speech
 
 	def generate_opening(self):
