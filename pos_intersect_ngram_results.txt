@@ -1,0 +1,65 @@
+Attempt at combining POS sequence with 3-gram word sequences.
+Took a part of speech sequence from an actual Obama speech
+Then looked at the intersection of words from Obama speeches with the correct POS tag intersected with words from the n-gram model
+
+My thoughts:
+Not that great. Seem less coherent than normal n-gram markov. Don't really need POS in picking word because n-gram markov already picks words that make sense, i.e. it picks from a list of words that have actually followed to previous 2 words in an Obama speech.
+Topic biasing also didn't work as well because more focused on POS tag than topic file.
+
+Results:
+
+No topic:
+1.
+And the best that there is in we will pursue to bring the treaty, additional, displaced story of this war to disarm that eager way on all kinds. And everywhere of It 'm to win over the past and future the Syrian opposition, we 's our young future of our military alone, going not, is to break free possible a day off wants n't.
+
+2.
+Cartagena United - underwater, of He fully drew, what 's passed a on Secretary to continue for these young million, one allies -- including Iran -- means cuts agreed illegal insurance and health, dad with health, country across endeavor.
+
+3.
+Now, make offered that a small force ideas for Too is an area to spur when is a unique answering out, But When 's this so-called dissent. I did ask an clearer in threat ; the cooperation of difficult oil -- to fight tour after the passage to do that both handle our skills.
+
+4.
+We have activated city and Today was product. War tested hard details that are neither president because our interests. We trust on whispered peers in their families will receive now born. and who deserve not required aspires the batting by urgency -- because education that the American character, and a half hour, and This important creation like million to keep ourselves passed the recovery literally nuclear as potential world regime to detain our idea.
+
+5.
+But they get back much to say it as, as I fight going to examine going for a of she to analyze up these health. Ive of your leaders, what are each of these least of all human, to be President to get into their school.
+
+6.
+We will - They would have once to shoulder America CEOs, the surface what is called the Internet provide. he have, I know that rebuilding because Ill Lady, and I have our troops workers, there of I reminds to be back.
+
+-------------------------------------------------------------------------------
+
+Foreign Policy:
+1.
+McCain set saying We. a representatives will even happen an, And alongside, the faces their safe return. you made to wall available of those guiding. the is when East But you know, when I came into office -- and -- THE -- a country ; this keeps Were I invented our societies, for a hero because because the size now in plain -- more than a system.
+
+2.
+Your kind enough just 's to professionalize new children in a vital in Medicare : to keep our word, to produce her stories, to reinforce racial in special hike that must ultimately do Our businesses is got.
+
+3.
+To have businesses menacing as, Two institution with going fuels will jeopardize a 17 immigration sophistication shift -- a sustained effort among the strongest military that that we set about the impact and can maintain after its likely state.
+
+4.
+Across ourselves could convene to hold down for the decisions that will strengthen taken in a departure from Senate to confirm these more security in a Chilean Republicans. a 's both family they soar On a Leon United ; oil, health and dignity of a.
+
+5.
+Instead, viciously, she 's in to this White and Americans to take out. this friend can pay sent that we -- before of a Newtown States -- names like experience So. and much self-help that live this harm ride far.
+
+-------------------------------------------------------------------------
+
+Health care:
+
+1.
+To all the things, to that faith, to Every steelworkers, cities, years, priorities, prevails -- that is designed a system that the economic recovery. or us need to reach their potential detainees.
+
+2.
+That is the police them could see And the one will give at its members And pioneers, and a that now causes about on Polish tens. with the options, the only reason comes a system to root out waste, to start connecting youve to be a wind turbine, or to advance the rights of its parts.
+
+3.
+It believe, You have within rights have cost of it as was to A savings. debts think served and So achieve Washington you send an e-mail around the world -- one am that Todos.
+
+4.
+It ca give more opportunities for cooperation weapons, more troops that generations, more days of lines, And more workers of American political. you will forge -- you should be a voter chance on ideas what attack historic millions, And it will spread out thats because eye Until a full private So this steady stream.
+
+5.
+But gladly, Osama of one, that may be in us. John illness of the insurance important to us to think that somehow to blame up in countries that. as now, back up, common subsidizing of it.

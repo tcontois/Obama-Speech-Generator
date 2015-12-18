@@ -35,42 +35,46 @@ def writeseq():
 if __name__ == '__main__':
 	# writeseq()
 	pos_dictionary=getwords()
+	punctuation = set([".", "!", "?", ",", ";"])
 
-	word_markov=modified_markov.Markov()
+	# word_markov=modified_markov.Markov()
+	# topic = open('./datasets/short_fp.txt')
+	topic = open('./datasets/short_health_care.txt')
+	word_markov=modified_markov.Markov(topic_file=topic, topic_weight=50, chain_size=3)
+
 
 	sequence_file=open('./datasets/sequence.txt')
 	sequence_markov=sequence.Markov(sequence_file)
-	pos_sequence = sequence_markov.get_tag_sequence().split()
 	
-	punctuation = set([".", "!", "?", ",", ";"])
-	sentence=[]
-	first = True
-	for tag in pos_sequence:
-		if first:
-			first = False
-			next_word=random.choice(pos_dictionary[tag])
-			tries = 0
-			while(next_word[0].isupper() is False and tries < 1000):
-				tries += 1
+	for z in range(5):
+		pos_sequence = sequence_markov.get_tag_sequence().split()
+		sentence=[]
+		first = True
+		for tag in pos_sequence:
+			if first:
+				first = False
 				next_word=random.choice(pos_dictionary[tag])
-			sentence.append(next_word)
-		else:
-			if tag in punctuation:
-				sentence[-1] += tag
-			else:
-				tag_options = pos_dictionary[tag]
-				cache_options = word_markov.get_cache_list(words_seq=sentence)
-				if(cache_options is not None):
-					intersection = [w for w in cache_options if unicode(w, "utf-8") in tag_options]
-					print intersection
-					if(len(intersection) < 1):
-						next_word=random.choice(pos_dictionary[tag])
-					else:
-						print 'here'
-						next_word=random.choice(intersection)
-				else:
+				tries = 0
+				while(next_word[0].isupper() is False and tries < 1000):
+					tries += 1
 					next_word=random.choice(pos_dictionary[tag])
-
 				sentence.append(next_word)
+			else:
+				if tag in punctuation:
+					sentence[-1] += tag
+				else:
+					tag_options = pos_dictionary[tag]
+					cache_options = word_markov.get_cache_list(words_seq=sentence)
+					if(cache_options is not None):
+						intersection = [w for w in cache_options if unicode(w, "utf-8") in tag_options]
+						if(len(intersection) < 1):
+							next_word=random.choice(pos_dictionary[tag])
+						else:
+							next_word=random.choice(intersection)
+					else:
+						next_word=random.choice(pos_dictionary[tag])
 
-	print ' '.join(sentence)
+					sentence.append(next_word)
+
+		print ' '.join(sentence)
+		print ' '

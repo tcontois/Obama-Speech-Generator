@@ -157,7 +157,6 @@ class Markov(object):
 				# last_words.append(str(words_seq[-1*i]))
 				last_words.insert(0, str(words_seq[-1*i]))
 			if(tuple(last_words) in self.cache):
-				print tuple(last_words)
 				return self.cache[tuple(last_words)]
 			else:
 				return None
