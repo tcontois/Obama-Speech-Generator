@@ -32,6 +32,11 @@ if __name__ == '__main__':
 	# print "Markov chain looking at previous %s words:" % chainlength
 	# print markov.generate_markov_text(size=50)
 
+	# UNCOMMENT THE ABOVE LINE TO GENERATE THE CLASSIC MARKOV GENERATED TEXT
+
+	
+	# unbiased_text = markov.generate_markov_text(size=50)
+
 	markov=modified_markov.Markov(topic_file=None, topic_weight=0)
 	print "Actual Obama speech:"
 	print markov.get_actual_obama_speech(size=50)
@@ -81,6 +86,42 @@ if __name__ == '__main__':
 	# 			unbiased_text=first_part+new_np+second_part
 	# 		except:
 	# 			pass
+
+# 	unbiased_text=unbiased_text.lower()
+
+# 	t = TextBlob(unbiased_text.decode('ascii', 'ignore'))
+# 	unbiased_noun_phrases=t.noun_phrases
+
+# 	# print unbiased_noun_phrases
+# '''
+# THE BELOW CODE SEARCHES THROUGH A MARKOV GENERATED TEXT SEQUENCE, IDENTIFIES THE NOUN PHRASES AND REPLACES 
+# THEM WITH NOUN PHRASES FOUND IN OUR SUPER CONCENTRATED TOPIC FILES
+
+# POSSIBLE THINGS TO CREATE: MAKE CHECKS TO MAKE THE SUBSTITUTIONS MORE SEEMLESS
+
+# '''
+# 	for np in unbiased_noun_phrases:
+# 		if np not in biased_noun_phrases:
+# 			try:
+# 				np=np.encode('utf-8')
+# 				index=unbiased_text.index(np)
+# 				np_len=len(np)
+# 				first_part=unbiased_text[:index]
+# 				second_part=unbiased_text[(index+np_len):]
+# 				if unbiased_text[index+np_len-1] is 's':
+# 					print "TRUE ", np
+# 					new_np=random.choice(biased_noun_phrases)
+# 					new_np=new_np.encode('utf-8')
+# 					while  new_np[-1] != 's':
+# 						new_np=random.choice(biased_noun_phrases)
+# 						new_np=new_np.encode('utf-8')
+# 				else:
+# 					new_np=random.choice(biased_noun_phrases)
+# 					new_np=new_np.encode('utf-8')
+# 				new_np=new_np.upper()
+# 				unbiased_text=first_part+new_np+second_part
+# 			except:
+# 				pass
 
 	# print unbiased_noun_phrases
 	# print len(unbiased_noun_phrases)
