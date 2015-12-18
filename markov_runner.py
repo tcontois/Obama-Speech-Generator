@@ -30,6 +30,9 @@ if __name__ == '__main__':
 	markov=modified_markov.Markov(topic_file=None, topic_weight=50, chain_size=chainlength)
 	print "Markov chain looking at previous %s words:" % chainlength
 	# print markov.generate_markov_text(size=50)
+	# UNCOMMENT THE ABOVE LINE TO GENERATE THE CLASSIC MARKOV GENERATED TEXT
+
+	
 	unbiased_text = markov.generate_markov_text(size=50)
 
 	topic_text=topic.read()
@@ -46,12 +49,18 @@ if __name__ == '__main__':
 	unbiased_text = ''.join(ch for ch in unbiased_text if ch not in exclude)
 
 	unbiased_text=unbiased_text.lower()
-	
+
 	t = TextBlob(unbiased_text.decode('ascii', 'ignore'))
 	unbiased_noun_phrases=t.noun_phrases
 
-	print unbiased_noun_phrases
+	# print unbiased_noun_phrases
+'''
+THE BELOW CODE SEARCHES THROUGH A MARKOV GENERATED TEXT SEQUENCE, IDENTIFIES THE NOUN PHRASES AND REPLACES 
+THEM WITH NOUN PHRASES FOUND IN OUR SUPER CONCENTRATED TOPIC FILES
 
+POSSIBLE THINGS TO CREATE: MAKE CHECKS TO MAKE THE SUBSTITUTIONS MORE SEEMLESS
+
+'''
 	for np in unbiased_noun_phrases:
 		if np not in biased_noun_phrases:
 			try:
