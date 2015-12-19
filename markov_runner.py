@@ -7,17 +7,33 @@ from collections import defaultdict
 from textblob import TextBlob
 import nltk
 
+
+''' 
+This program contains two different ways to bias a generated speech. 
+
+(1) The first way is to have the NGram model read a topic text many times to 
+	make the likelihood it selects a word from their higher. The number of 
+	times it reads the topic text is the topic_weight variable. 
+
+(2) The second way we bias a generated text is to first generate a obama speech
+	then identify noun_phrases, after this we replace all noun phrases with
+	randomly selected noun phrases from our topic files. 
+'''
+
+
 def topic_weight_bias():
-	# topic = open('./datasets/short_health_care.txt')
-	# topic = open('./datasets/short_fp.txt')
+	''' Uncomment line to select topic '''
+	# topic = open('./datasets/short_health_care.txt') #Health Care 
+	# topic = open('./datasets/short_fp.txt') #Foreign Policy
 	topic = None
 	markov=modified_markov.Markov(topic_file=topic, topic_weight=20, chain_size=3)
 	print markov.generate_markov_text(size=50)
 
 
 def noun_phrase_replacement():
-	# topic = open('./datasets/short_health_care.txt')
-	topic = open('./datasets/short_fp.txt')
+	'''Uncomment topic source to select where we get our biased noun phrases '''
+	# topic = open('./datasets/short_health_care.txt') #Health Care
+	topic = open('./datasets/short_fp.txt') #Foreign Policy
 	topic_text=topic.read()
 	biased_noun_phrases=TextBlob(topic_text.decode('ascii','ignore')).noun_phrases
 
@@ -55,6 +71,7 @@ def noun_phrase_replacement():
 
 
 if __name__ == '__main__':
+	''' Our two approached to creating topic bias '''
 	topic_weight_bias()
 	noun_phrase_replacement()
 
