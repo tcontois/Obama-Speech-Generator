@@ -41,20 +41,6 @@ class Markov(object):
 		return chain
 
 	def chains(self):
-		"""Generates chains from the given data string based on passed chain size.
-
-		So if our string were:
-
-			"What a lovely day"
-
-		With a chain size of 3, we'd generate:
-
-			(What, a, lovely)
-
-		and
-
-			(a, lovely, day)
-		"""
 
 		if len(self.words) < self.chain_size:
 			return
