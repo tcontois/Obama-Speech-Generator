@@ -3,19 +3,17 @@ from textblob import TextBlob
 import nltk
 import sequence
 import random
+import modified_markov
 
 def getwords():
-	filew = open('datasets/dictionaryforalex.txt','w')
+	# filew = open('datasets/dictionaryforalex.txt','w')
 	file = open('datasets/obama_speeches.txt')
 	text = file.read()
-	# t = TextBlob(text.decode('ascii', 'ignore'))
-	# wordlist = t.tags
 	tokens = nltk.word_tokenize(text.decode('ascii', 'ignore'))
 	tagged = nltk.pos_tag(tokens)
 	taglist = {}
-	#print wordlist
 	for k,v in tagged:
-		filew.write(k+" "+v+'\n')
+		# filew.write(k+" "+v+'\n')
 		if v in taglist:
 			taglist[v].append(k)
 		else:
@@ -28,7 +26,6 @@ def writeseq():
 	filew = open('datasets/sequence.txt','w')
 	file = open('datasets/obama_speeches.txt')
 	text = file.read()
-	# t = TextBlob(text.decode('ascii','ignore'))
 	tokens = nltk.word_tokenize(text.decode('ascii','ignore'))
 	tagged = nltk.pos_tag(tokens)
 	for k,v in tagged:
@@ -37,34 +34,45 @@ def writeseq():
 
 if __name__ == '__main__':
 	# writeseq()
-	sequence_file=open('./datasets/sequence.txt')
-	word_file=open('./datasets/obama_speeches.txt')
 	pos_dictionary=getwords()
-	# sequence_markov=sequence.Markov(sequence_file)
-	word_markov=sequence.Markov(word_file)
-	word_markov_cache=word_markov.database()
-	# pos_sequence= sequence_markov.generate_markov_text().split()
-	pos_sequence= " PRP MD VB IN DT NN CC DT NN IN PRP VBP VBN UH PRP MD VB CC VB NNP IN DT JJ NN CC PRP MD VB PRP IN VBG DT NN IN NN NN RB IN VBG NNS TO VB NNS IN NNS RBR"
-	pos_sequence=pos_sequence.split()
+	punctuation = set([".", "!", "?", ",", ";"])
+
+	# word_markov=modified_markov.Markov()
+	# topic = open('./datasets/short_fp.txt')
+	topic = open('./datasets/short_health_care.txt')
+	word_markov=modified_markov.Markov(topic_file=topic, topic_weight=50, chain_size=3)
+
+
+	sequence_file=open('./datasets/sequence.txt')
+	sequence_markov=sequence.Markov(sequence_file)
+	
+	pos_sequence = sequence_markov.get_tag_sequence().split()
 	sentence=[]
-	first=True
-	for tags in pos_sequence:
-		intersection=[]
-		if len(sentence)==0:
-			next_word=random.choice(pos_dictionary[tags])
+	first = True
+	for tag in pos_sequence:
+		if first:
+			first = False
+			next_word=random.choice(pos_dictionary[tag])
+			tries = 0
+			while(next_word[0].isupper() is False and tries < 1000):
+				tries += 1
+				next_word=random.choice(pos_dictionary[tag])
 			sentence.append(next_word)
 		else:
-			next_word=sentence[-1]
-			for words in word_markov_cache[(next_word,)]:
-				uwords= unicode(words, "utf-8")
-				if uwords in pos_dictionary[tags]:
-					intersection.append(words)
-			if len(intersection)>0:
-				next_word=random.choice(intersection)
+			if tag in punctuation:
+				sentence[-1] += tag
 			else:
-				print "Intersection Empty"
-				next_word=random.choice(pos_dictionary[tags])
-			sentence.append(next_word)
-		print ' '.join(sentence)
+				tag_options = pos_dictionary[tag]
+				cache_options = word_markov.get_cache_list(words_seq=sentence)
+				if(cache_options is not None):
+					intersection = [w for w in cache_options if unicode(w, "utf-8") in tag_options]
+					if(len(intersection) < 1):
+						next_word=random.choice(pos_dictionary[tag])
+					else:
+						next_word=random.choice(intersection)
+				else:
+					next_word=random.choice(pos_dictionary[tag])
+
+				sentence.append(next_word)
 
 	print ' '.join(sentence)

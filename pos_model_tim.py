@@ -1,7 +1,7 @@
 from collections import defaultdict
 from textblob import TextBlob
 import nltk
-import sequence_tim as sequence
+import sequence
 import random
 import modified_markov
 

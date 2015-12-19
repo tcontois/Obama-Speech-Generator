@@ -40,7 +40,7 @@ class Markov(object):
 				self.cache[key] = [next_word]
 		return self.cache
 
-	def generate_markov_text(self, size=10):
+	def generate_markov_text(self, size=35):
 		seed = random.randint(0, self.word_size - 3)
 		gen_words = []
 		seed_words = self.words_at_position(seed)[:-1]
@@ -51,4 +51,25 @@ class Markov(object):
 			next_word = random.choice(self.cache[tuple(last_words)])
 			gen_words.append(next_word)
 		return ' '.join(gen_words)
+
+	def get_tag_sequence(self, size=35):
+		seed = random.randint(0, self.word_size - size)
+		punctuation = set([".", "!", "?"])
+		count = 0;
+		tags = []
+		while(seed != 0 and self.words[seed-1] not in punctuation and count < 1000):
+			count += 1
+			seed = random.randint(0, self.word_size - size)
+		tags.append(self.words[seed])
+		num = 0
+		while(num < size or self.words[seed] not in punctuation):
+			seed += 1
+			num += 1
+			if(seed >= self.word_size - 1):
+				break
+			tags.append(self.words[seed])
+		return ' '.join(tags)
+
+
+
 
