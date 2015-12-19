@@ -7,17 +7,6 @@ from collections import defaultdict
 from textblob import TextBlob
 import nltk
 
-
-''' 
-This program contains two different ways to bias an generated speech. 
-(1) The first way is to have the NGram model read a topic text many times to 
-	make the likelihood it selects a word from their higher. The number of 
-	times it reads the topic text is the topic_weight variable. 
-
-(2) The second way we bias a generated text is to first 
-'''
-
-
 def topic_weight_bias():
 	# topic = open('./datasets/short_health_care.txt')
 	# topic = open('./datasets/short_fp.txt')
