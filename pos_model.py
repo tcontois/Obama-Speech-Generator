@@ -5,6 +5,19 @@ import sequence
 import random
 import modified_markov
 
+'''
+This program was an early attempt at creating a text generation model.
+We use an NLTK tagger we found and tag the database of over 300 obama_speeches
+made by President Obama. We create a large dictionary where each key
+is a part of speech and the values associated with it are words that 
+fit that tag. We then grab a sequence of POS tags which will be the basis of our
+sentence. We iteratore over the tags selecting the words that match the part of speech.
+Because this would be create nonsense sentences, we also use our markov program. 
+We find the intersection of the words that match the given POS and the words
+that have been seen follow the previous word. If this intersection is empty a
+random word is selected. 
+'''
+
 def getwords():
 	# filew = open('datasets/dictionaryforalex.txt','w')
 	file = open('datasets/obama_speeches.txt')
