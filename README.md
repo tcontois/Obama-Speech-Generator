@@ -1,1 +1,5 @@
-# 585
+# Obama Speech Generator
+Our work is focused on creating a statistical text generation model that uses a training set of speeches given by President Obama, and outputs a readable text based on an input of topic and Markov chain length. Our approach involves modifying a Markov text generation system to more accurately mimic the speech patterns and topical choices made by Obama in his speeches.This is accomplished through some light templating, and a collection of datasets tagged by topic, which are used to weigh certain words more heavily based on their association with the speech subject. The results vary based on the chain length chosen, but the output of the text generator is often somewhat readable and topically consistent, despite not always being completely coherent or grammatically sound.
+
+# Example
+"Thank you, everybody. In fact, they helped develop many of the Islamic Republic of Iran, which saw its strategic position strengthened by the Russian people -- innocent, hardworking Americans to terrorism at the time it was first notified of this great nation. God bless you. God bless America."
